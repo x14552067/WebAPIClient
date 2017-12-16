@@ -11,7 +11,9 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
+import java.util.ArrayList;
 import javax.ws.rs.core.MediaType;
+import models.Account;
 import models.Customer;
 import org.glassfish.jersey.internal.util.Base64;
 
@@ -23,6 +25,7 @@ public class BankingApp {
     
     final public static String baseUrlString = "http://localhost:49000/api";
     public static Customer currentCustomer;
+    public static ArrayList<Account> allAccounts;
     
     public static boolean isCustomer(String email, String pin){
         final String isCustomerUrl = baseUrlString + "/customers";
@@ -93,9 +96,25 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
                 .put(ClientResponse.class, customerToUpdate);
-        System.out.println(response);
         if(response.getStatus() == 200){
             currentCustomer = (Customer) response.getEntity(Customer.class);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    public static boolean getAllAccounts(){
+        final String getAllAccountsUrl = baseUrlString + "/accounts";
+        Client client = new Client();
+        WebResource target = client.resource(getAllAccountsUrl);
+        String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
+        ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
+                .get(ClientResponse.class);
+        System.out.println(response);
+        if(response.getStatus() == 200){
+            allAccounts = (ArrayList<Account>) response.getEntity(ArrayList.class);
             return true;
         }else{
             return false;
