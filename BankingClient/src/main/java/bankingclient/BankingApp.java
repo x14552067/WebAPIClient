@@ -54,6 +54,7 @@ public class BankingApp {
         WebResource target = client.resource(isRegisterCustomerUrl);
         ClientResponse response = target.header("Content-type", "application/json")
                 .post(ClientResponse.class, customerToRegister);
+        System.out.println(response);
         if(response.getStatus() == 201){
             currentCustomer = (Customer) response.getEntity(Customer.class);
             return true;
@@ -108,7 +109,6 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
                 .get(ClientResponse.class);
-        System.out.println(response);
         if(response.getStatus() == 200){
             allAccounts = response.getEntity(new GenericType<ArrayList<Account>>(){});
             return true;
