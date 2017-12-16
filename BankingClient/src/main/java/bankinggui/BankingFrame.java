@@ -397,7 +397,6 @@ public class BankingFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    // -Select Account-, Current Account, Deposit Account, Loan Account
     private void openAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountComboActionPerformed
         switch((String) openAccountCombo.getSelectedItem()){
             case "-Select Account-":
