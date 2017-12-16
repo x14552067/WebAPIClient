@@ -403,6 +403,7 @@ public class BankingFrame extends javax.swing.JFrame {
                         account.getMonthlyRepayment() + 
                         "\n-----------------\n";
             }
+            accountInfoTextArea.setText(accountInfo);
         }
     }
     
