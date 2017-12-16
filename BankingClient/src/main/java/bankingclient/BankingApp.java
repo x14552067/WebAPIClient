@@ -25,7 +25,7 @@ import org.glassfish.jersey.internal.util.Base64;
 public class BankingApp {
     
     final public static String baseUrlString = "http://localhost:49000/api";
-    public static Customer currentCustomer;
+    public static Customer currentCustomer = new Customer();
     public static ArrayList<Account> allAccounts = new ArrayList();
     
     public static boolean isCustomer(String email, String pin){

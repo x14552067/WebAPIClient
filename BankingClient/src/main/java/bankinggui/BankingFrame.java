@@ -3,6 +3,7 @@ package bankinggui;
 import bankingclient.BankingApp;
 import java.util.Arrays;
 import models.Account;
+import models.Customer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -148,7 +149,7 @@ public class BankingFrame extends javax.swing.JFrame {
             }
         });
 
-        openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account" }));
+        openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account    " }));
         openAccountCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openAccountComboActionPerformed(evt);
@@ -536,8 +537,8 @@ public class BankingFrame extends javax.swing.JFrame {
     }
     
     public void logout(){
-        BankingApp.currentCustomer = null;
-        BankingApp.allAccounts = null;
+        BankingApp.currentCustomer = new Customer();
+        BankingApp.allAccounts = new ArrayList();
         firstNameTxt.setText("");
         lastNameTxt.setText("");
         addressTxt.setText("");
