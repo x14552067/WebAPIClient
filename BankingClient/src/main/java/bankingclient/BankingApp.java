@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import models.Account;
 import models.AccountActionBody;
 import models.Customer;
+import models.TransferBody;
 import org.glassfish.jersey.internal.util.Base64;
 
 /**
@@ -193,11 +194,31 @@ public class BankingApp {
         accountAction.setTransactionAmount(transactionAmount);
         
         Client client = new Client();
-        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isTransactionSuccessfulUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.accept("application/json").header("Content-Type", "application/json").header("Authorization", encodedString)
                 .post(ClientResponse.class, accountAction);
+        return response.getStatus() == 200;
+    }
+    
+    
+    public static boolean isTransferSuccessful(String from, String to, String amount){
+        final String isTransferSuccessfulUrl = baseUrlString + "/accounts/transfer";
+        
+        TransferBody transfer = new TransferBody();
+        try{
+            transfer.setSenderAccountNumber(Integer.parseInt(from));
+            transfer.setReceiverAccountNumber(Integer.parseInt(to));
+            transfer.setAmount(Integer.parseInt(amount));
+        }catch(NumberFormatException e){
+            return false;
+        }
+        
+        Client client = new Client();
+        WebResource target = client.resource(isTransferSuccessfulUrl);
+        String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
+        ClientResponse response = target.accept("application/json").header("Content-Type", "application/json").header("Authorization", encodedString)
+                .post(ClientResponse.class, transfer);
         return response.getStatus() == 200;
     }
     

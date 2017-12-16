@@ -228,6 +228,11 @@ public class BankingFrame extends javax.swing.JFrame {
         jLabel18.setText("Amount");
 
         transferBtn.setText("Transfer");
+        transferBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -810,6 +815,19 @@ public class BankingFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_depWitBtnActionPerformed
 
+    private void transferBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferBtnActionPerformed
+        if(transferFromTxt.getText().equalsIgnoreCase("") || transferToTxt.getText().equalsIgnoreCase("") || transferAmountTxt.getText().equalsIgnoreCase("")){
+            infoTextArea.setText("All Transfer Fields Required");
+        }else{
+            if(BankingApp.isTransferSuccessful(transferFromTxt.getText(), transferToTxt.getText(), transferAmountTxt.getText())){
+                infoTextArea.setText("Transfer Successful");
+                showAccountInfo();
+            }else{
+                infoTextArea.setText("Transfer Unsuccessful");
+            }
+        }
+    }//GEN-LAST:event_transferBtnActionPerformed
+
     
     public void showAccountInfo(){
         if(BankingApp.getAllAccounts()){
@@ -848,6 +866,10 @@ public class BankingFrame extends javax.swing.JFrame {
         depWitAccountNumberTxt.setEnabled(true);
         depWitAmountTxt.setEnabled(true);
         depWitBtn.setEnabled(true);
+        transferFromTxt.setEnabled(true);
+        transferToTxt.setEnabled(true);
+        transferAmountTxt.setEnabled(true);
+        transferBtn.setEnabled(true);
         showAccountInfo();
     }
     
@@ -880,6 +902,10 @@ public class BankingFrame extends javax.swing.JFrame {
         depWitAccountNumberTxt.setEnabled(false);
         depWitAmountTxt.setEnabled(false);
         depWitBtn.setEnabled(false);
+        transferFromTxt.setEnabled(false);
+        transferToTxt.setEnabled(false);
+        transferAmountTxt.setEnabled(false);
+        transferBtn.setEnabled(false);
     }
     
     
