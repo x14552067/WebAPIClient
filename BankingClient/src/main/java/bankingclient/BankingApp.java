@@ -9,11 +9,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
 import java.util.ArrayList;
-import javax.ws.rs.core.MediaType;
 import models.Account;
 import models.Customer;
 import org.glassfish.jersey.internal.util.Base64;
@@ -127,13 +123,31 @@ public class BankingApp {
         
         Account newAccount = new Account();
         newAccount.setSortCode("990284");
+        int balance;
         try{
-            newAccount.setCurrentBalance(Integer.parseInt(depositAmount));
+            balance = Integer.parseInt(depositAmount);
         }catch(NumberFormatException e){
             return false;
         }
-        newAccount.setInterestRate(0);
-        newAccount.setMonthlyRepayment(0);
+        switch(accountType){
+            case "current_account":
+                newAccount.setInterestRate(0);
+                newAccount.setMonthlyRepayment(0);
+                break;
+            case "deposit_account":
+                newAccount.setInterestRate(2);
+                balance = balance + ((balance / 100) * 2);
+                newAccount.setMonthlyRepayment(0);
+                break;
+            case "loan_account":
+                newAccount.setInterestRate(3);
+                balance = balance + ((balance / 100) * 2);
+                newAccount.setMonthlyRepayment(balance / 60);
+                break;
+            default:
+                break;
+        }
+        newAccount.setCurrentBalance(balance);
         
         Client client = new Client();
         WebResource target = client.resource(isOpenAccountUrl);

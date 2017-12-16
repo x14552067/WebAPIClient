@@ -468,28 +468,39 @@ public class BankingFrame extends javax.swing.JFrame {
                     openAccountLbl.setText("    ");
                     openAccountTxt.setVisible(false);
                     openAccountBtn.setEnabled(false);
+                    openAccountCombo.setSelectedIndex(0);
                 }else{
                     infoTextArea.setText("Unable to Create\nCurrent Account");
                 }
                 break;
             case "Deposit Account":
+                if(amount.length() < 3){
+                    infoTextArea.setText("Minimum Deposit amount: 100");
+                    return;
+                }
                 if(BankingApp.isOpenAccount(amount, "deposit_account")){
                     infoTextArea.setText("Deposit Account Created");
                     showAccountInfo();
                     openAccountLbl.setText("    ");
                     openAccountTxt.setVisible(false);
                     openAccountBtn.setEnabled(false);
+                    openAccountCombo.setSelectedIndex(0);
                 }else{
                     infoTextArea.setText("Unable to Create\nDeposit Account");
                 }
                 break;
             case "Loan Account":
+                if(amount.length() < 3){
+                    infoTextArea.setText("Minimum Loan amount: 100");
+                    return;
+                }
                 if(BankingApp.isOpenAccount(amount, "loan_account")){
                     infoTextArea.setText("Loan Account Created");
                     showAccountInfo();
                     openAccountLbl.setText("    ");
                     openAccountTxt.setVisible(false);
                     openAccountBtn.setEnabled(false);
+                    openAccountCombo.setSelectedIndex(0);
                 }else{
                     infoTextArea.setText("Unable to Create\nLoan Account");
                 }
@@ -555,7 +566,9 @@ public class BankingFrame extends javax.swing.JFrame {
         updateBtn.setEnabled(false);
         deleteBtn.setEnabled(false);
         openAccountCombo.setEnabled(false);
+        openAccountCombo.setSelectedIndex(0);
         closeAccountCombo.setEnabled(false);
+        closeAccountCombo.setSelectedIndex(0);
         closeAccountTxt.setEnabled(false);
         openAccountTxt.setVisible(false);
         openAccountLbl.setText("    ");
