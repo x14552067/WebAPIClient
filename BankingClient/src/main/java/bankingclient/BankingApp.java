@@ -26,7 +26,7 @@ public class BankingApp {
     
     final public static String baseUrlString = "http://localhost:49000/api";
     public static Customer currentCustomer;
-    public static ArrayList<Account> allAccounts;
+    public static ArrayList<Account> allAccounts = new ArrayList();
     
     public static boolean isCustomer(String email, String pin){
         final String isCustomerUrl = baseUrlString + "/customers";
