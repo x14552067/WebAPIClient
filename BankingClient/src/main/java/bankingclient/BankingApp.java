@@ -147,7 +147,7 @@ public class BankingApp {
             default:
                 break;
         }
-        System.out.println(balance);
+        System.out.println(balance / 60);
         newAccount.setCurrentBalance(balance);
         
         Client client = new Client();
