@@ -9,6 +9,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.LoggingFilter;
 import java.util.ArrayList;
 import javax.ws.rs.core.Response;
 import models.Account;
@@ -29,6 +30,7 @@ public class BankingApp {
     public static boolean isCustomer(String email, String pin){
         final String isCustomerUrl = baseUrlString + "/customers";
         Client client = Client.create();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isCustomerUrl);
         String encodedString = Base64.encodeAsString(email + ":" + pin);
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
@@ -53,6 +55,7 @@ public class BankingApp {
         customerToRegister.setCustomerPin(pin);           
         
         Client client = Client.create();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isRegisterCustomerUrl);
         ClientResponse response = target.header("Content-type", "application/json")
                 .put(ClientResponse.class, customerToRegister);
@@ -69,6 +72,7 @@ public class BankingApp {
     public static boolean isCustomerDeleted(){
         final String isCustomerDeletedUrl = baseUrlString + "/customers/" + currentCustomer.getCustomerNumber();
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isCustomerDeletedUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
@@ -88,6 +92,7 @@ public class BankingApp {
         customerToUpdate.setCustomerPin(pin);
         
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isCustomerUpdatedUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
@@ -107,6 +112,7 @@ public class BankingApp {
         }
         final String getAllAccountsUrl = baseUrlString + "/accounts";
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(getAllAccountsUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
@@ -152,6 +158,7 @@ public class BankingApp {
         newAccount.setCurrentBalance(balance);
         
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isOpenAccountUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
@@ -163,6 +170,7 @@ public class BankingApp {
     public static boolean isAccountDeleted(int accountNumber, String accountType){
         final String isAccountDeletedUrl = baseUrlString + "/accounts/" + accountType + "/" + accountNumber;
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isAccountDeletedUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
@@ -185,6 +193,7 @@ public class BankingApp {
         accountAction.setTransactionAmount(transactionAmount);
         
         Client client = new Client();
+        client.addFilter(new LoggingFilter(System.out));
         WebResource target = client.resource(isTransactionSuccessfulUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
