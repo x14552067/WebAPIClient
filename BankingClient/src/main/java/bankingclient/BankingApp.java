@@ -154,6 +154,7 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
                 .put(ClientResponse.class, newAccount);
+        System.out.println(response);
         return response.getStatus() == 201;
     }
     

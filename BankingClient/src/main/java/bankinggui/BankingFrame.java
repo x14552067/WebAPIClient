@@ -398,7 +398,6 @@ public class BankingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void openAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountComboActionPerformed
-        System.out.println((String) openAccountCombo.getSelectedItem());
         switch((String) openAccountCombo.getSelectedItem()){
             case "-Select Account-":
                 openAccountLbl.setText("    ");
