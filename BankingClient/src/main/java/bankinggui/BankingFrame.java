@@ -198,7 +198,7 @@ public class BankingFrame extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Deposit / Withdraw");
 
-        depWitCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Action-", "Deposit - Current a/c", "Deposit - Deposit a/c", "Deposit - Laon a/c", "Withdraw - Current a/c", "" }));
+        depWitCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Action-", "Deposit - Current a/c", "Deposit - Deposit a/c", "Deposit - Loan a/c", "Withdraw - Current a/c" }));
         depWitCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 depWitComboActionPerformed(evt);
@@ -723,7 +723,7 @@ public class BankingFrame extends javax.swing.JFrame {
                 depWitAmountTxt.setEnabled(true);
                 depWitBtn.setEnabled(true);
                 break;
-            case "Deposit - Laon a/c":
+            case "Deposit - Loan a/c":
                 depWitAccountNumberTxt.setEnabled(true);
                 depWitAmountTxt.setEnabled(true);
                 depWitBtn.setEnabled(true);
@@ -780,7 +780,7 @@ public class BankingFrame extends javax.swing.JFrame {
                         infoTextArea.setText("Unable to complete Transaction");
                     }
                     break;
-                case "Deposit - Laon a/c":
+                case "Deposit - Loan a/c":
                     if(BankingApp.isTransactionSuccessful(accountNumber, amount, "loan", "deposit")){
                         infoTextArea.setText("Transaction Successful");
                         showAccountInfo();

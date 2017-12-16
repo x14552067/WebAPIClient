@@ -188,7 +188,7 @@ public class BankingApp {
         WebResource target = client.resource(isTransactionSuccessfulUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
-                .put(ClientResponse.class, accountAction);
+                .post(ClientResponse.class, accountAction);
         return response.getStatus() == 200;
     }
     
