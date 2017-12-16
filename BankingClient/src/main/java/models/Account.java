@@ -39,7 +39,7 @@ public class Account {
     @XmlElement(name = "interest_rate")
     private float interestRate;
     
-    @JsonProperty("mothly_repayment")
+    @JsonProperty("monthly_repayment")
     @XmlElement(name = "monthly_repayment")
     private int monthlyRepayment;
     
