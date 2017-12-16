@@ -131,12 +131,22 @@ public class BankingFrame extends javax.swing.JFrame {
         closeAccountBtn.setText("Close Account");
 
         closeAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account" }));
+        closeAccountCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeAccountComboActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Account Type");
 
         jLabel9.setText("Information");
 
         openAccountBtn.setText("Open Account");
+        openAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openAccountBtnActionPerformed(evt);
+            }
+        });
 
         openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account" }));
         openAccountCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -389,27 +399,86 @@ public class BankingFrame extends javax.swing.JFrame {
     private void openAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountComboActionPerformed
         switch((String) openAccountCombo.getSelectedItem()){
             case "-Select Account-":
-                openAccountLbl.setText("");
+                openAccountLbl.setText("    ");
                 openAccountTxt.setVisible(false);
+                openAccountBtn.setEnabled(false);
                 break;
             case "Current Account":
-                openAccountLbl.setText("Deposit Amount");
+                openAccountLbl.setText("Deposit");
                 openAccountTxt.setVisible(true);
+                openAccountBtn.setEnabled(true);
                 break;
             case "Deposit Account":
-                openAccountLbl.setText("Deposit Amount");
+                openAccountLbl.setText("Deposit");
                 openAccountTxt.setVisible(true);
+                openAccountBtn.setEnabled(true);
                 break;
             case "Loan Account":
                 openAccountLbl.setText("Loan Amount");
                 openAccountTxt.setVisible(true);
+                openAccountBtn.setEnabled(true);
                 break;
             default:
-                openAccountLbl.setText("");
+                openAccountLbl.setText("    ");
                 openAccountTxt.setVisible(false);
+                openAccountBtn.setEnabled(false);
                 break;
         }
     }//GEN-LAST:event_openAccountComboActionPerformed
+
+    private void closeAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeAccountComboActionPerformed
+        switch((String) closeAccountCombo.getSelectedItem()){
+            case "-Select Account-":
+                closeAccountTxt.setVisible(false);
+                closeAccountBtn.setEnabled(false);
+                break;
+            case "Current Account":
+                closeAccountTxt.setVisible(true);
+                closeAccountBtn.setEnabled(true);
+                break;
+            case "Deposit Account":
+                closeAccountTxt.setVisible(true);
+                closeAccountBtn.setEnabled(true);
+                break;
+            case "Loan Account":
+                closeAccountTxt.setVisible(true);
+                closeAccountBtn.setEnabled(true);
+                break;
+            default:
+                closeAccountTxt.setVisible(false);
+                closeAccountBtn.setEnabled(false);
+                break;
+        }
+    }//GEN-LAST:event_closeAccountComboActionPerformed
+
+    private void openAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountBtnActionPerformed
+        String amount = openAccountTxt.getText();
+        if(amount.contains(".")){
+            infoTextArea.setText("Whole numbers only");
+            return;
+        }
+        if(!amount.equalsIgnoreCase("")){
+            switch((String) openAccountCombo.getSelectedItem()){
+                case "Current Account":
+                if(BankingApp.isOpenCurrentAccount(amount)){
+                    infoTextArea.setText("Current Account Created");
+                    showAccountInfo();
+                    openAccountLbl.setText("    ");
+                    openAccountTxt.setVisible(false);
+                    openAccountBtn.setEnabled(false);
+                }
+                break;
+            case "Deposit Account":
+                
+                break;
+            case "Loan Account":
+                
+                break;
+            default:
+                break;
+            }
+        }
+    }//GEN-LAST:event_openAccountBtnActionPerformed
 
     
     public void showAccountInfo(){
@@ -440,7 +509,6 @@ public class BankingFrame extends javax.swing.JFrame {
         registerBtn.setEnabled(false);
         logoutBtn.setEnabled(true);
         closeAccountBtn.setEnabled(true);
-        openAccountBtn.setEnabled(true);
         updateBtn.setEnabled(true);
         deleteBtn.setEnabled(true);
         openAccountCombo.setEnabled(true);
@@ -470,7 +538,7 @@ public class BankingFrame extends javax.swing.JFrame {
         closeAccountCombo.setEnabled(false);
         closeAccountTxt.setEnabled(false);
         openAccountTxt.setVisible(false);
-        openAccountLbl.setText("");
+        openAccountLbl.setText("    ");
     }
     
     

@@ -107,6 +107,7 @@ public class BankingApp {
     
     
     public static boolean getAllAccounts(){
+        allAccounts.clear();
         final String getAllAccountsUrl = baseUrlString + "/accounts";
         Client client = new Client();
         WebResource target = client.resource(getAllAccountsUrl);
@@ -116,6 +117,32 @@ public class BankingApp {
         System.out.println(response);
         if(response.getStatus() == 200){
             allAccounts = response.getEntity(new GenericType<ArrayList<Account>>(){});
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    public static boolean isOpenCurrentAccount(String depositAmount){
+        final String isOpenCurrentAccountUrl = baseUrlString + "/accounts" + "/current_account";
+        
+        Account newAccount = new Account();
+        newAccount.setSortCode("990284");
+        try{
+            newAccount.setCurrentBalance(Integer.parseInt(depositAmount));
+        }catch(NumberFormatException e){
+            return false;
+        }
+        newAccount.setInterestRate(0);
+        newAccount.setMonthlyRepayment(0);
+        
+        Client client = new Client();
+        WebResource target = client.resource(isOpenCurrentAccountUrl);
+        String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
+        ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
+                .put(ClientResponse.class, newAccount);
+        if(response.getStatus() == 201){
             return true;
         }else{
             return false;
