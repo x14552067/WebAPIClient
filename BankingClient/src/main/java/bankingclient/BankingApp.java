@@ -142,13 +142,13 @@ public class BankingApp {
             case "loan_account":
                 newAccount.setInterestRate(3);
                 balance = balance + ((balance / 100) * 3);
-                int monthlyRepayment = balance / 60;
+                int monthlyRepayment = 60;
                 newAccount.setMonthlyRepayment(monthlyRepayment);
+                System.out.println(monthlyRepayment);
                 break;
             default:
                 break;
         }
-        System.out.println(balance / 60);
         newAccount.setCurrentBalance(balance);
         
         Client client = new Client();
