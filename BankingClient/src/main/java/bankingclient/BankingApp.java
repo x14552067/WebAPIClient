@@ -89,7 +89,7 @@ public class BankingApp {
         WebResource target = client.resource(isCustomerUpdatedUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
-                .put(ClientResponse.class, customerToUpdate);
+                .post(ClientResponse.class, customerToUpdate);
         if(response.getStatus() == 200){
             currentCustomer = (Customer) response.getEntity(Customer.class);
             return true;
@@ -154,8 +154,18 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
                 .put(ClientResponse.class, newAccount);
-        System.out.println(response);
         return response.getStatus() == 201;
+    }
+    
+    
+    public static boolean isAccountDeleted(int accountNumber, String accountType){
+        final String isAccountDeletedUrl = baseUrlString + "/accounts/" + accountType + "/" + accountNumber;
+        Client client = new Client();
+        WebResource target = client.resource(isAccountDeletedUrl);
+        String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
+        ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
+                .delete(ClientResponse.class);
+        return response.getStatus() == 204;
     }
     
 }
