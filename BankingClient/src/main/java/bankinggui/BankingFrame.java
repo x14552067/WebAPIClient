@@ -1,6 +1,7 @@
 package bankinggui;
 
 import bankingclient.BankingApp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import models.Account;
 import models.Customer;
@@ -537,7 +538,7 @@ public class BankingFrame extends javax.swing.JFrame {
     }
     
     public void logout(){
-        BankingApp.currentCustomer = new Customer();
+        BankingApp.currentCustomer = null;
         BankingApp.allAccounts = new ArrayList();
         firstNameTxt.setText("");
         lastNameTxt.setText("");
