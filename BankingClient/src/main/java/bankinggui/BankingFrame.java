@@ -64,7 +64,8 @@ public class BankingFrame extends javax.swing.JFrame {
         accountInfoTextArea = new javax.swing.JTextPane();
         addressTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        showAllAccountsBtn = new javax.swing.JButton();
+        openAccountLbl = new javax.swing.JLabel();
+        openAccountTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,12 +139,18 @@ public class BankingFrame extends javax.swing.JFrame {
         openAccountBtn.setText("Open Account");
 
         openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account" }));
+        openAccountCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openAccountComboActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Account Type");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Open Account");
+        jLabel11.setToolTipText("");
 
         infoTextArea.setEditable(false);
         jScrollPane3.setViewportView(infoTextArea);
@@ -152,13 +159,6 @@ public class BankingFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(accountInfoTextArea);
 
         jLabel12.setText("Address");
-
-        showAllAccountsBtn.setText("Show All Accounts");
-        showAllAccountsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showAllAccountsBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,26 +215,30 @@ public class BankingFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2))
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(openAccountCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(openAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(closeAccountCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(closeAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(closeAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(openAccountLbl))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(openAccountCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(openAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(openAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(closeAccountCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(closeAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(closeAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(355, 355, 355))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(showAllAccountsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +269,7 @@ public class BankingFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -273,6 +277,10 @@ public class BankingFrame extends javax.swing.JFrame {
                             .addComponent(openAccountCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(openAccountLbl)
+                            .addComponent(openAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(openAccountBtn)
                         .addGap(17, 17, 17)
                         .addComponent(jLabel6)
@@ -290,9 +298,7 @@ public class BankingFrame extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showAllAccountsBtn)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -379,9 +385,31 @@ public class BankingFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void showAllAccountsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllAccountsBtnActionPerformed
-        
-    }//GEN-LAST:event_showAllAccountsBtnActionPerformed
+    // -Select Account-, Current Account, Deposit Account, Loan Account
+    private void openAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountComboActionPerformed
+        switch((String) openAccountCombo.getSelectedItem()){
+            case "-Select Account-":
+                openAccountLbl.setText("");
+                openAccountTxt.setVisible(false);
+                break;
+            case "Current Account":
+                openAccountLbl.setText("Deposit Amount");
+                openAccountTxt.setVisible(true);
+                break;
+            case "Deposit Account":
+                openAccountLbl.setText("Deposit Amount");
+                openAccountTxt.setVisible(true);
+                break;
+            case "Loan Account":
+                openAccountLbl.setText("Loan Amount");
+                openAccountTxt.setVisible(true);
+                break;
+            default:
+                openAccountLbl.setText("");
+                openAccountTxt.setVisible(false);
+                break;
+        }
+    }//GEN-LAST:event_openAccountComboActionPerformed
 
     
     public void showAccountInfo(){
@@ -393,9 +421,9 @@ public class BankingFrame extends javax.swing.JFrame {
                         account.getAccountNumer() + 
                         "\nAccount Type:\t" + 
                         account.getAccountType() + 
-                        "\nSort Code:\t" + 
+                        "\nSort Code:\t\t" + 
                         account.getSortCode() +
-                        "\nBalance:\t" + 
+                        "\nBalance:\t\t" + 
                         account.getCurrentBalance() + 
                         "\nInterest Rate:\t" + 
                         account.getInterestRate() + 
@@ -418,7 +446,6 @@ public class BankingFrame extends javax.swing.JFrame {
         openAccountCombo.setEnabled(true);
         closeAccountCombo.setEnabled(true);
         closeAccountTxt.setEnabled(true);
-        showAllAccountsBtn.setEnabled(true);
         showAccountInfo();
     }
     
@@ -442,7 +469,8 @@ public class BankingFrame extends javax.swing.JFrame {
         openAccountCombo.setEnabled(false);
         closeAccountCombo.setEnabled(false);
         closeAccountTxt.setEnabled(false);
-        showAllAccountsBtn.setEnabled(false);
+        openAccountTxt.setVisible(false);
+        openAccountLbl.setText("");
     }
     
     
@@ -508,9 +536,10 @@ public class BankingFrame extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton openAccountBtn;
     private javax.swing.JComboBox<String> openAccountCombo;
+    private javax.swing.JLabel openAccountLbl;
+    private javax.swing.JTextField openAccountTxt;
     private javax.swing.JPasswordField pinTxt;
     private javax.swing.JButton registerBtn;
-    private javax.swing.JButton showAllAccountsBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
