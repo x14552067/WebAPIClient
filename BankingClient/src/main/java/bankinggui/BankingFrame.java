@@ -150,7 +150,7 @@ public class BankingFrame extends javax.swing.JFrame {
             }
         });
 
-        openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account    " }));
+        openAccountCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Account-", "Current Account", "Deposit Account", "Loan Account" }));
         openAccountCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openAccountComboActionPerformed(evt);
@@ -398,6 +398,7 @@ public class BankingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void openAccountComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountComboActionPerformed
+        System.out.println((String) openAccountCombo.getSelectedItem());
         switch((String) openAccountCombo.getSelectedItem()){
             case "-Select Account-":
                 openAccountLbl.setText("    ");

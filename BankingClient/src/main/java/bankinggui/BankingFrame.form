@@ -337,7 +337,7 @@
             <StringItem index="0" value="-Select Account-"/>
             <StringItem index="1" value="Current Account"/>
             <StringItem index="2" value="Deposit Account"/>
-            <StringItem index="3" value="Loan Account    "/>
+            <StringItem index="3" value="Loan Account"/>
           </StringArray>
         </Property>
       </Properties>
