@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import java.util.ArrayList;
+import javax.ws.rs.core.Response;
 import models.Account;
 import models.Customer;
 import org.glassfish.jersey.internal.util.Base64;
@@ -165,7 +166,7 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
                 .delete(ClientResponse.class);
-        return response.getStatus() == 204;
+        return response.getStatus() == 410;
     }
     
 }
