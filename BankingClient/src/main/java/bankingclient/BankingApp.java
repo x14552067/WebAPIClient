@@ -74,11 +74,7 @@ public class BankingApp {
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
                 .delete(ClientResponse.class);
-        if(response.getStatus() == 204){
-            return true;
-        }else{
-            return false;
-        }
+        return response.getStatus() == 204;
     }
     
     
@@ -107,7 +103,9 @@ public class BankingApp {
     
     
     public static boolean getAllAccounts(){
-        allAccounts.clear();
+        if(!allAccounts.isEmpty()){
+            allAccounts.clear();
+        }
         final String getAllAccountsUrl = baseUrlString + "/accounts";
         Client client = new Client();
         WebResource target = client.resource(getAllAccountsUrl);
@@ -124,8 +122,8 @@ public class BankingApp {
     }
     
     
-    public static boolean isOpenCurrentAccount(String depositAmount){
-        final String isOpenCurrentAccountUrl = baseUrlString + "/accounts" + "/current_account";
+    public static boolean isOpenAccount(String depositAmount, String accountType){
+        final String isOpenAccountUrl = baseUrlString + "/accounts" + "/" + accountType;
         
         Account newAccount = new Account();
         newAccount.setSortCode("990284");
@@ -138,15 +136,11 @@ public class BankingApp {
         newAccount.setMonthlyRepayment(0);
         
         Client client = new Client();
-        WebResource target = client.resource(isOpenCurrentAccountUrl);
+        WebResource target = client.resource(isOpenAccountUrl);
         String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
                 .put(ClientResponse.class, newAccount);
-        if(response.getStatus() == 201){
-            return true;
-        }else{
-            return false;
-        }
+        return response.getStatus() == 201;
     }
     
 }

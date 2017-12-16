@@ -460,19 +460,37 @@ public class BankingFrame extends javax.swing.JFrame {
         if(!amount.equalsIgnoreCase("")){
             switch((String) openAccountCombo.getSelectedItem()){
                 case "Current Account":
-                if(BankingApp.isOpenCurrentAccount(amount)){
+                if(BankingApp.isOpenAccount(amount, "current_account")){
                     infoTextArea.setText("Current Account Created");
                     showAccountInfo();
                     openAccountLbl.setText("    ");
                     openAccountTxt.setVisible(false);
                     openAccountBtn.setEnabled(false);
+                }else{
+                    infoTextArea.setText("Unable to Create\nCurrent Account");
                 }
                 break;
             case "Deposit Account":
-                
+                if(BankingApp.isOpenAccount(amount, "deposit_account")){
+                    infoTextArea.setText("Deposit Account Created");
+                    showAccountInfo();
+                    openAccountLbl.setText("    ");
+                    openAccountTxt.setVisible(false);
+                    openAccountBtn.setEnabled(false);
+                }else{
+                    infoTextArea.setText("Unable to Create\nDeposit Account");
+                }
                 break;
             case "Loan Account":
-                
+                if(BankingApp.isOpenAccount(amount, "loan_account")){
+                    infoTextArea.setText("Loan Account Created");
+                    showAccountInfo();
+                    openAccountLbl.setText("    ");
+                    openAccountTxt.setVisible(false);
+                    openAccountBtn.setEnabled(false);
+                }else{
+                    infoTextArea.setText("Unable to Create\nLoan Account");
+                }
                 break;
             default:
                 break;
