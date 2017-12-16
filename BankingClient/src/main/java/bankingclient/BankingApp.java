@@ -53,7 +53,7 @@ public class BankingApp {
         Client client = Client.create();
         WebResource target = client.resource(isRegisterCustomerUrl);
         ClientResponse response = target.header("Content-type", "application/json")
-                .post(ClientResponse.class, customerToRegister);
+                .put(ClientResponse.class, customerToRegister);
         System.out.println(response);
         if(response.getStatus() == 201){
             currentCustomer = (Customer) response.getEntity(Customer.class);
