@@ -7,6 +7,7 @@ package bankingclient;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -114,7 +115,7 @@ public class BankingApp {
                 .get(ClientResponse.class);
         System.out.println(response);
         if(response.getStatus() == 200){
-            allAccounts = (ArrayList<Account>) response.getEntity(ArrayList.class);
+            allAccounts = response.getEntity(new GenericType<ArrayList<Account>>(){});
             return true;
         }else{
             return false;
