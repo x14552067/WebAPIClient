@@ -12,6 +12,7 @@ import com.sun.jersey.api.client.WebResource;
 import java.util.ArrayList;
 import javax.ws.rs.core.Response;
 import models.Account;
+import models.AccountActionBody;
 import models.Customer;
 import org.glassfish.jersey.internal.util.Base64;
 
@@ -167,6 +168,28 @@ public class BankingApp {
         ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", "Basic " + encodedString)
                 .delete(ClientResponse.class);
         return response.getStatus() == 410;
+    }
+    
+    
+    public static boolean isTransactionSuccessful(int accountNumber, String amount, String accountType, String action){
+        final String isTransactionSuccessfulUrl = baseUrlString + "/accounts/" + accountType + "/" + action;
+        
+        AccountActionBody accountAction = new AccountActionBody();
+        accountAction.setAccountNumber(accountNumber);
+        int transactionAmount;
+        try{
+            transactionAmount = Integer.parseInt(amount);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        accountAction.setTransactionAmount(transactionAmount);
+        
+        Client client = new Client();
+        WebResource target = client.resource(isTransactionSuccessfulUrl);
+        String encodedString = Base64.encodeAsString(currentCustomer.getEmail() + ":" + currentCustomer.getCustomerPin());
+        ClientResponse response = target.header("Content-Type", "application/json").header("Authorization", encodedString)
+                .put(ClientResponse.class, accountAction);
+        return response.getStatus() == 200;
     }
     
 }
