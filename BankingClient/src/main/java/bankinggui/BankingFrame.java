@@ -380,15 +380,31 @@ public class BankingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void showAllAccountsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllAccountsBtnActionPerformed
-        if(BankingApp.getAllAccounts()){
-            for(Account account : BankingApp.allAccounts){
-                System.out.println("Account Number: " + account.getAccountNumer());
-            }
-        }else{
-            System.out.println("This didn't work GLENN!!!");
-        }
+        
     }//GEN-LAST:event_showAllAccountsBtnActionPerformed
 
+    
+    public void showAccountInfo(){
+        if(BankingApp.getAllAccounts()){
+            String accountInfo = "";
+            for(Account account : BankingApp.allAccounts){
+                accountInfo = accountInfo + 
+                        "Account Number:\t" + 
+                        account.getAccountNumer() + 
+                        "\nAccount Type:\t" + 
+                        account.getAccountType() + 
+                        "\nSort Code:\t" + 
+                        account.getSortCode() +
+                        "\nBalance:\t" + 
+                        account.getCurrentBalance() + 
+                        "\nInterest Rate:\t" + 
+                        account.getInterestRate() + 
+                        "\nRepayment p/m:\t" + 
+                        account.getMonthlyRepayment() + 
+                        "\n-----------------\n";
+            }
+        }
+    }
     
     public void login(){
         loginBtn.setEnabled(false);
@@ -402,6 +418,7 @@ public class BankingFrame extends javax.swing.JFrame {
         closeAccountCombo.setEnabled(true);
         closeAccountTxt.setEnabled(true);
         showAllAccountsBtn.setEnabled(true);
+        showAccountInfo();
     }
     
     public void logout(){
@@ -412,6 +429,8 @@ public class BankingFrame extends javax.swing.JFrame {
         addressTxt.setText("");
         emailTxt.setText("");
         pinTxt.setText("");
+        infoTextArea.setText("");
+        accountInfoTextArea.setText("");
         loginBtn.setEnabled(true);
         registerBtn.setEnabled(true);
         logoutBtn.setEnabled(false);
